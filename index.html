@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Rose Day 🌹</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff4b6e, #ff9a9e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    max-width: 420px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.card h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1.15rem;
+    margin-bottom: 20px;
+}
+
+.rose-img {
+    width: 200px;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+button {
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    border: none;
+    background: #ff003c;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.rose {
+    position: absolute;
+    top: -50px;
+    font-size: 25px;
+    animation: fall 6s linear infinite;
+}
+
+@keyframes fall {
+    from { transform: translateY(-10vh); opacity: 1; }
+    to { transform: translateY(110vh); opacity: 0; }
+}
+
+#surprise {
+    display: none;
+    font-size: 1.3rem;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Hey Ish 🌹</h1>
+    <p>
+        On this Rose Day,<br>
+        I give you this rose as a symbol of my love, care, and endless smiles just for you 💕
+    </p>
+
+    <img src="rose.jpg" class="rose-img" alt="Rose">
+
+    <button onclick="showSurprise()">Accept My Rose 🌹</button>
+
+    <div id="surprise">
+        🌹 This rose is not just a flower…<br>
+        It’s my heart, wrapped in petals, only for you 💖<br><br>
+        — Yours always, Coco 💞
+    </div>
+
+    <audio id="music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+function showSurprise() {
+    document.getElementById("surprise").style.display = "block";
+    document.getElementById("music").play().catch(()=>{});
+}
+
+// Falling roses animation
+function createRose() {
+    const rose = document.createElement("div");
+    rose.className = "rose";
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.fontSize = (Math.random() * 20 + 20) + "px";
+    document.body.appendChild(rose);
+    setTimeout(() => rose.remove(), 6000);
+}
+setInterval(createRose, 300);
+</script>
+
+</body>
+</html>
