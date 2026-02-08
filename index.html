@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Rose Day 🌹</title>
+<title>Propose Day 💍</title>
 
 <style>
 body {
     margin: 0;
     height: 100vh;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ff4b6e, #ff9a9e);
+    background: radial-gradient(circle at top, #1a1a2e, #000);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,108 +17,210 @@ body {
     color: white;
 }
 
+/* ---------- FIRST SCREEN ---------- */
 .card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
     padding: 40px;
-    border-radius: 25px;
+    border-radius: 30px;
     text-align: center;
-    max-width: 420px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    max-width: 500px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    position: relative;
 }
 
-.card h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+/* ---------- SECOND SCREEN ---------- */
+#secondPage {
+    display: none;
+    text-align: center;
+    width: 100%;
 }
 
-.card p {
-    font-size: 1.15rem;
-    margin-bottom: 20px;
-}
-
-.rose-img {
-    width: 200px;
-    border-radius: 20px;
+/* Text */
+h1 { font-size: 2.6rem; }
+p { font-size: 1.15rem; }
+.question {
+    font-size: 1.6rem;
+    font-weight: bold;
     margin: 20px 0;
 }
 
+/* Buttons */
 button {
-    padding: 14px 30px;
+    padding: 14px 28px;
     font-size: 1.1rem;
     border-radius: 30px;
     border: none;
-    background: #ff003c;
-    color: white;
     cursor: pointer;
-    transition: transform 0.3s;
+    margin: 10px;
 }
 
-button:hover {
-    transform: scale(1.1);
-}
-
-.rose {
+.yes { background: #ff0055; color: white; }
+.no {
+    background: white;
+    color: #ff0055;
     position: absolute;
-    top: -50px;
+}
+
+/* Ring */
+.ring {
+    font-size: 60px;
+    animation: ringPop 1.5s infinite alternate;
+}
+
+@keyframes ringPop {
+    from { transform: scale(1); }
+    to { transform: scale(1.3); }
+}
+
+/* ---------- FLOWERS ---------- */
+.flower {
+    position: fixed;
+    font-size: 26px;
+    animation: flowerFall 5s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes flowerFall {
+    0% { transform: scale(0.5) translateY(-10vh); opacity: 1; }
+    100% { transform: scale(1.3) translateY(110vh); opacity: 0; }
+}
+
+/* ---------- EFFECTS ---------- */
+.heart {
+    position: fixed;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+.firework {
+    position: fixed;
     font-size: 25px;
-    animation: fall 6s linear infinite;
+    animation: explode 1s forwards;
 }
 
-@keyframes fall {
-    from { transform: translateY(-10vh); opacity: 1; }
-    to { transform: translateY(110vh); opacity: 0; }
+@keyframes explode {
+    from { transform: scale(0.5); opacity: 1; }
+    to { transform: scale(2.5); opacity: 0; }
 }
 
-#surprise {
-    display: none;
-    font-size: 1.3rem;
-    margin-top: 20px;
+/* Media */
+#secondPage img, #secondPage video {
+    max-width: 90%;
+    max-height: 280px;
+    border-radius: 20px;
+    margin-top: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-    <h1>Hey Ish 🌹</h1>
+<!-- FIRST PAGE -->
+<div class="card" id="firstPage">
+    <div class="ring">💍</div>
+
+    <h1>Hey Ish 💖</h1>
+
     <p>
-        On this Rose Day,<br>
-        I give you this rose as a symbol of my love, care, and endless smiles just for you 💕
+        Every smile, every fight, every memory…<br>
+        I want all of it with you, forever ✨
     </p>
 
-    <img src="rose.jpg" class="rose-img" alt="Rose">
+    <div class="question">Will you be mine forever?</div>
 
-    <button onclick="showSurprise()">Accept My Rose 🌹</button>
-
-    <div id="surprise">
-        🌹 This rose is not just a flower…<br>
-        It’s my heart, wrapped in petals, only for you 💖<br><br>
-        — Yours always, Coco 💞
-    </div>
-
-    <audio id="music" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+    <button class="yes" onclick="acceptProposal()">YES 💕</button>
+    <button class="no" id="noBtn" onmouseover="runAway()" onclick="acceptProposal()">NO 🙈</button>
 </div>
 
+<!-- SECOND PAGE -->
+<div id="secondPage">
+    <img src="photo.jpg" alt="Our Photo">
+
+    <video controls loop muted playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <p style="font-size:1.4rem; margin-top:20px;">
+        <strong>💍 She said YES 💖</strong><br><br>
+        I choose you today, tomorrow, and always ❤️<br>
+        Every version of my future has you in it.<br><br>
+        — Forever yours, Coco 💞
+    </p>
+</div>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-function showSurprise() {
-    document.getElementById("surprise").style.display = "block";
-    document.getElementById("music").play().catch(()=>{});
+let escapeCount = 0;
+let flowerInterval;
+
+function runAway() {
+    const btn = document.getElementById("noBtn");
+    if (escapeCount < 4) {
+        btn.style.left = Math.random() * 80 + "vw";
+        btn.style.top = Math.random() * 80 + "vh";
+        escapeCount++;
+    } else {
+        btn.innerText = "OKAY YES 😅";
+        btn.style.background = "#ff0055";
+        btn.style.color = "white";
+        btn.onmouseover = null;
+    }
 }
 
-// Falling roses animation
-function createRose() {
-    const rose = document.createElement("div");
-    rose.className = "rose";
-    rose.innerHTML = "🌹";
-    rose.style.left = Math.random() * 100 + "vw";
-    rose.style.fontSize = (Math.random() * 20 + 20) + "px";
-    document.body.appendChild(rose);
-    setTimeout(() => rose.remove(), 6000);
+function acceptProposal() {
+    document.getElementById("firstPage").style.display = "none";
+    document.getElementById("music").play().catch(()=>{});
+
+    // 🌸 FLOWERS FOR 5 SECONDS
+    flowerInterval = setInterval(flowerPop, 120);
+
+    setTimeout(() => {
+        clearInterval(flowerInterval);
+        document.getElementById("secondPage").style.display = "block";
+
+        setInterval(firework, 250);
+        setInterval(createHeart, 300);
+    }, 5000);
 }
-setInterval(createRose, 300);
+
+function flowerPop() {
+    const flowers = ["🌸","🌹","🌺","🌷","💐"];
+    const f = document.createElement("div");
+    f.className = "flower";
+    f.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+    f.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 5000);
+}
+
+function firework() {
+    const fw = document.createElement("div");
+    fw.className = "firework";
+    fw.innerHTML = "🎆";
+    fw.style.left = Math.random() * 100 + "vw";
+    fw.style.top = Math.random() * 50 + "vh";
+    document.body.appendChild(fw);
+    setTimeout(() => fw.remove(), 1000);
+}
+
+function createHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+}
 </script>
 
 </body>
